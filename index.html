@@ -254,26 +254,21 @@ dialog::backdrop {
 </head>
 <body class="relative w-screen h-screen flex flex-col items-center justify-center select-none overflow-hidden">
 <div class="stage-grid" aria-hidden="true"></div>
-
-<!-- Ambient Lighting Blurs & Stage Spotlights -->
 <div class="spotlight-cone" aria-hidden="true"></div>
 <div class="stage-laser-left" aria-hidden="true"></div>
 <div class="stage-laser-right" aria-hidden="true"></div>
 <div class="fixed top-1/4 left-1/4 w-96 h-96 bg-orange-600/15 rounded-full blur-3xl pointer-events-none"></div>
 <div class="fixed bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
-<!-- Floating Discrete Action Bar (Hidden in corner, high accessibility on hover/tap) -->
+<!-- Floating Discrete Action Bar -->
 <div class="fixed top-3 right-3 z-40 flex items-center gap-2 opacity-25 hover:opacity-100 transition-opacity duration-300">
-  <!-- Sound Toggle -->
   <button id="soundBtn" type="button" class="p-2 sm:px-3 sm:py-2 rounded-xl bg-black/60 hover:bg-black/90 border border-white/10 text-white/80 hover:text-white transition flex items-center gap-1.5 text-xs backdrop-blur-md shadow-lg" title="เปิด/ปิดเสียง">
     <svg id="soundIcon" class="w-4 h-4 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
     <span class="hidden md:inline" id="soundLabel">เสียง</span>
   </button>
-  <!-- Fullscreen Toggle -->
   <button id="screenBtn" type="button" class="p-2 sm:px-3 sm:py-2 rounded-xl bg-black/60 hover:bg-black/90 border border-white/10 text-white/80 hover:text-white transition flex items-center gap-1.5 text-xs backdrop-blur-md shadow-lg" title="เต็มจอ (F11)">
     <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
   </button>
-  <!-- Hidden Admin Drawer Toggle -->
   <button id="adminBtn" type="button" class="px-3 py-2 rounded-xl bg-gradient-to-r from-orange-600/90 to-amber-500/90 hover:from-orange-500 hover:to-amber-400 text-black font-extrabold transition flex items-center gap-2 text-xs shadow-xl backdrop-blur-md" title="จัดการรายชื่อทีม">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
     <span class="tracking-wide">จัดการรายชื่อ</span>
@@ -281,103 +276,66 @@ dialog::backdrop {
 </div>
 
 <main class="relative z-10 flex flex-col items-center justify-center w-full h-full p-2">
-  <!-- Wheel Wrapper Container: Maximized for Presentation -->
   <div class="relative w-[min(90vw,calc(100vh-80px),720px)] aspect-square flex items-center justify-center my-auto">
-    <!-- Glowing Pulsing Backdrops -->
     <div class="absolute inset-4 rounded-full bg-gradient-to-tr from-orange-500/15 via-lime-500/10 to-transparent blur-3xl pointer-events-none"></div>
     <div class="wheel-halo"></div>
 
-    <!-- Outer Pointer Indicator (12 o'clock) -->
     <div id="wheelPointer" class="wheel-pointer">
       <div class="wheel-pointer-inner"></div>
     </div>
 
-    <!-- Master Wheel Canvas -->
     <canvas id="wheelCanvas" width="1400" height="1400" class="w-full h-full drop-shadow-[0_16px_45px_rgba(0,0,0,0.9)] cursor-pointer"></canvas>
 
-    <!-- Center Tactile Button (NO LOGO, CLICK TO SPIN) -->
-  <button id="centerSpinBtn" class="center-hub-btn group" title="คลิกเพื่อหมุนวงล้อ">
-    <div class="hub-radar"></div>
-    
-    <!-- Primary Action Indicator -->
-    <div class="flex flex-col items-center justify-center z-10 pointer-events-none transition-transform group-hover:scale-110">
-      <span id="hubPrimaryText" class="text-xl sm:text-2xl md:text-3xl font-black font-mono tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-lime-300 drop-shadow-[0_2px_10px_rgba(255,200,0,0.5)]">
-        SPIN
-      </span>
-      <span id="hubSubText" class="text-[9px] sm:text-[11px] text-lime-400 font-sans tracking-widest uppercase font-semibold mt-0.5">
-        กดเพื่อหมุน
-      </span>
-    </div>
+    <button id="centerSpinBtn" class="center-hub-btn group" title="คลิกเพื่อหมุนวงล้อ">
+      <div class="hub-radar"></div>
+      <div class="flex flex-col items-center justify-center z-10 pointer-events-none transition-transform group-hover:scale-110">
+        <span id="hubPrimaryText" class="text-xl sm:text-2xl md:text-3xl font-black font-mono tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-lime-300 drop-shadow-[0_2px_10px_rgba(255,200,0,0.5)]">SPIN</span>
+        <span id="hubSubText" class="text-[9px] sm:text-[11px] text-lime-400 font-sans tracking-widest uppercase font-semibold mt-0.5">กดเพื่อหมุน</span>
+      </div>
+      <div id="hubStatusBadge" class="absolute bottom-3 sm:bottom-4 px-2 py-0.5 rounded-full bg-black/60 border border-white/10 text-[9px] sm:text-[10px] text-amber-300 font-mono tracking-wider">คิวที่ 1</div>
+    </button>
+  </div>
 
-    <!-- Live Queue Mini Badge inside Hub -->
-    <div id="hubStatusBadge" class="absolute bottom-3 sm:bottom-4 px-2 py-0.5 rounded-full bg-black/60 border border-white/10 text-[9px] sm:text-[10px] text-amber-300 font-mono tracking-wider">
-      คิวที่ 1
-    </div>
-  </button>
-</div>
-
-<!-- Discreet Bottom Ticker (Minimalist feedback) -->
-<div class="mt-2 flex items-center gap-2 text-xs text-white/50 z-20">
-  <span id="remainingHint" class="text-lime-400 font-medium font-mono">5 ทีมพร้อมขึ้นเวที</span>
-  <span class="text-white/20">•</span>
-  <span class="text-white/40 hidden sm:inline">กด Spacebar หรือคลิกวงล้อเพื่อหมุน</span>
-</div>
+  <div class="mt-2 flex items-center gap-2 text-xs text-white/50 z-20">
+    <span id="remainingHint" class="text-lime-400 font-medium font-mono">5 ทีมพร้อมขึ้นเวที</span>
+    <span class="text-white/20">•</span>
+    <span class="text-white/40 hidden sm:inline">กด Spacebar หรือคลิกวงล้อเพื่อหมุน</span>
+  </div>
 </main>
 
 <div id="winnerModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
   <div class="relative w-full max-w-lg p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#142017] via-[#0d1610] to-[#070b08] border-2 border-lime-400/50 shadow-[0_0_80px_rgba(34,197,94,0.35)] text-center transform scale-90 transition-transform duration-300" id="winnerModalCard">
-    <!-- Close 'X' Button -->
     <button id="modalXCloseBtn" type="button" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white flex items-center justify-center transition cursor-pointer" aria-label="กลับสู่หน้าวงล้อ">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
 
-    <!-- Top Trophy Badge -->
     <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto -mt-12 sm:-mt-14 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-300 to-lime-400 p-0.5 shadow-xl shadow-orange-500/30 flex items-center justify-center">
       <div class="w-full h-full rounded-2xl bg-[#0c140f] flex items-center justify-center">
-        <span id="winnerRankNum" class="text-2xl sm:text-3xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-lime-300">
-          #01
-        </span>
+        <span id="winnerRankNum" class="text-2xl sm:text-3xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-lime-300">#01</span>
       </div>
     </div>
 
-    <!-- Announcement Content -->
     <div class="mt-4">
-      <div class="inline-block px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-300 text-xs font-semibold tracking-wider uppercase mb-2">
-        ลำดับนำเสนอนี้เป็นของ
-      </div>
-      <h2 id="winnerTeamName" class="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-lime-200 to-amber-200 my-3 px-2 break-words drop-shadow-[0_0_25px_rgba(163,230,53,0.45)] leading-snug">
-        CAMPAIGN HUB
-      </h2>
-      <p class="text-xs sm:text-base text-lime-400 font-semibold tracking-wide">
-        ★ BEYOND 20 SMARTX — เวทีนี้เป็นของคุณ ★
-      </p>
+      <div class="inline-block px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-300 text-xs font-semibold tracking-wider uppercase mb-2">ลำดับนำเสนอนี้เป็นของ</div>
+      <h2 id="winnerTeamName" class="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-lime-200 to-amber-200 my-3 px-2 break-words drop-shadow-[0_0_25px_rgba(163,230,53,0.45)] leading-snug">CAMPAIGN HUB</h2>
+      <p class="text-xs sm:text-base text-lime-400 font-semibold tracking-wide">★ BEYOND 20 SMARTX — เวทีนี้เป็นของคุณ ★</p>
     </div>
 
-    <!-- Quick Stats -->
-    <div class="mt-6 py-3 px-4 rounded-xl bg-black/40 border border-white/10 flex justify-around text-xs text-white/70">
-      <div>ได้ลำดับแล้ว: <span id="modalDrawnCount" class="text-white font-mono font-bold">1</span> ทีม</div>
-      <div class="text-white/20">|</div>
-      <div>รอขึ้นเวทีอีก: <span id="modalRemainCount" class="text-lime-400 font-mono font-bold">4</span> ทีม</div>
-    </div>
-
-    <!-- Modal Actions -->
-    <div class="mt-6 flex flex-wrap gap-3 justify-center">
+    <div class="mt-8 flex flex-wrap gap-3 justify-center">
       <button id="modalBackToWheelBtn" type="button" class="flex-1 min-w-[130px] py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-lg cursor-pointer">
         <svg class="w-4 h-4 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         <span>กลับหน้าวงล้อ</span>
       </button>
       <button id="modalNextBtn" type="button" class="flex-1 min-w-[130px] py-3 px-6 rounded-xl bg-gradient-to-r from-orange-500 to-amber-400 hover:brightness-110 text-black font-extrabold text-sm shadow-lg shadow-orange-500/25 transition flex items-center justify-center gap-2 cursor-pointer">
-        <span>สุ่มทีมถัดไป</span>
+        <span id="modalNextBtnText">สุ่มทีมถัดไป</span>
         <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
       </button>
     </div>
   </div>
 </div>
 
-<!-- Confetti Celebration Canvas (Fixes null getContext error) -->
 <canvas id="sparksCanvas" class="fixed inset-0 pointer-events-none z-40 hidden"></canvas>
 
-<!-- Hidden Backstage Admin Console -->
 <dialog id="adminDialog" class="w-full max-w-4xl p-4 sm:p-6 rounded-3xl bg-[#0c130f] border border-lime-500/30 text-white shadow-2xl backdrop-blur-2xl">
   <div class="flex items-center justify-between pb-4 border-b border-white/10">
     <div class="flex items-center gap-3">
@@ -396,38 +354,24 @@ dialog::backdrop {
     </button>
   </div>
 
-  <!-- Content Grid -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4 max-h-[72vh] overflow-y-auto pr-1">
-    <!-- Left Column: Input and Speeds -->
     <div class="flex flex-col gap-4">
       <div class="p-4 rounded-2xl bg-black/40 border border-white/10">
         <div class="flex items-center justify-between mb-2">
-          <label for="teamTextarea" class="text-xs font-bold text-lime-400 uppercase tracking-wider">
-            01 / รายชื่อทีม (บรรทัดละ 1 ชื่อ)
-          </label>
+          <label for="teamTextarea" class="text-xs font-bold text-lime-400 uppercase tracking-wider">01 / รายชื่อทีม (บรรทัดละ 1 ชื่อ)</label>
           <span id="inputCountTag" class="text-xs font-mono text-white/50">5 ทีม</span>
         </div>
         <textarea id="teamTextarea" rows="7" class="w-full p-3 rounded-xl bg-[#070b08] border border-white/15 text-sm text-white placeholder-white/30 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-400 font-sans leading-relaxed resize-none"></textarea>
-        
         <p id="inputErrorMsg" class="text-xs text-rose-400 mt-1 hidden"></p>
-
-        <!-- Actions -->
         <div class="flex items-center justify-between gap-2 mt-3">
           <div class="flex gap-2">
-            <button id="loadSampleBtn" type="button" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-white/70 hover:text-white transition">
-              ตัวอย่าง 5 ทีม
-            </button>
-            <button id="clearInputBtn" type="button" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-rose-300 transition">
-              ล้างข้อความ
-            </button>
+            <button id="loadSampleBtn" type="button" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-white/70 hover:text-white transition">ตัวอย่าง 5 ทีม</button>
+            <button id="clearInputBtn" type="button" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-rose-300 transition">ล้างข้อความ</button>
           </div>
-          <button id="applyTeamsBtn" type="button" class="px-4 py-2 rounded-xl bg-gradient-to-r from-lime-500 to-emerald-400 hover:brightness-110 text-black font-bold text-xs shadow-md transition">
-            อัปเดตวงล้อ
-          </button>
+          <button id="applyTeamsBtn" type="button" class="px-4 py-2 rounded-xl bg-gradient-to-r from-lime-500 to-emerald-400 hover:brightness-110 text-black font-bold text-xs shadow-md transition">อัปเดตวงล้อ</button>
         </div>
       </div>
 
-      <!-- Settings Block -->
       <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex flex-col gap-3">
         <div class="text-xs font-bold text-orange-400 uppercase tracking-wider">02 / ความเร็วการหมุน</div>
         <div class="flex items-center justify-between text-xs">
@@ -442,38 +386,23 @@ dialog::backdrop {
         </div>
         <div class="flex items-center justify-between text-xs pt-2 border-t border-white/5">
           <span class="text-white/70">รีเซ็ตผลการสุ่มทั้งหมด</span>
-          <button id="resetOrderBtn" type="button" class="px-3 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 text-xs transition">
-            ล้างลำดับเริ่มใหม่
-          </button>
+          <button id="resetOrderBtn" type="button" class="px-3 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 text-xs transition">ล้างลำดับเริ่มใหม่</button>
         </div>
       </div>
     </div>
 
-    <!-- Right Column: Queue & Drawn Order -->
     <div class="flex flex-col gap-4">
       <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex flex-col h-full">
         <div class="flex items-center justify-between mb-3">
-          <div class="text-xs font-bold text-amber-300 uppercase tracking-wider">
-            03 / ผลการสุ่มลำดับ
-          </div>
-          <span id="queueCountBadge" class="px-2 py-0.5 rounded-full bg-white/10 text-xs font-mono text-lime-400">
-            0 / 5
-          </span>
+          <div class="text-xs font-bold text-amber-300 uppercase tracking-wider">03 / ผลการสุ่มลำดับ</div>
+          <span id="queueCountBadge" class="px-2 py-0.5 rounded-full bg-white/10 text-xs font-mono text-lime-400">0 / 5</span>
         </div>
-
-        <!-- Drawn List Container -->
-        <div id="queueListContainer" class="flex-1 overflow-y-auto max-h-[290px] flex flex-col gap-1.5 pr-1">
-          <!-- Populated by JS -->
-        </div>
-
-        <!-- Empty State -->
+        <div id="queueListContainer" class="flex-1 overflow-y-auto max-h-[290px] flex flex-col gap-1.5 pr-1"></div>
         <div id="emptyQueueNotice" class="py-12 flex flex-col items-center justify-center text-center text-white/40">
           <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-2 text-xl font-mono">20</div>
           <p class="text-xs">ยังไม่มีการสุ่มลำดับ</p>
           <p class="text-[11px] text-white/30">กดหมุนวงล้อเพื่อเปิดคิวแรก</p>
         </div>
-
-        <!-- Action Export Bar -->
         <div class="flex items-center gap-2 mt-4 pt-3 border-t border-white/10">
           <button id="copyQueueBtn" type="button" class="flex-1 py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-white/80 hover:text-white transition flex items-center justify-center gap-1.5">
             <svg class="w-4 h-4 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
@@ -523,7 +452,6 @@ const DEFAULT_SAMPLE_TEAMS = [
   'ยืนยันตัวตึง!!'
 ];
 
-// Cyber Metallic Palette for Wheel Slices (High-contrast, vibrant, and stage-ready)
 const SLICE_PALETTE = [
   { bg1: '#ff7700', bg2: '#c2410c', text: '#ffffff', glow: '#ffb300' },
   { bg1: '#16a34a', bg2: '#064e3b', text: '#ffffff', glow: '#4ade80' },
@@ -548,7 +476,6 @@ let lastTickTime = 0;
 let pendingConfirmAction = null;
 let winningTeamId = null;
 
-// DOM Elements
 const canvas = document.getElementById('wheelCanvas');
 const ctx = canvas.getContext('2d');
 const sparksCanvas = document.getElementById('sparksCanvas');
@@ -559,15 +486,16 @@ const hubPrimaryText = document.getElementById('hubPrimaryText');
 const hubSubText = document.getElementById('hubSubText');
 const hubStatusBadge = document.getElementById('hubStatusBadge');
 const remainingHint = document.getElementById('remainingHint');
+
 const winnerModal = document.getElementById('winnerModal');
 const winnerModalCard = document.getElementById('winnerModalCard');
 const winnerRankNum = document.getElementById('winnerRankNum');
 const winnerTeamName = document.getElementById('winnerTeamName');
-const modalDrawnCount = document.getElementById('modalDrawnCount');
-const modalRemainCount = document.getElementById('modalRemainCount');
 const modalNextBtn = document.getElementById('modalNextBtn');
+const modalNextBtnText = document.getElementById('modalNextBtnText');
 const modalBackToWheelBtn = document.getElementById('modalBackToWheelBtn');
 const modalXCloseBtn = document.getElementById('modalXCloseBtn');
+
 const adminDialog = document.getElementById('adminDialog');
 const adminBtn = document.getElementById('adminBtn');
 const closeAdminBtn = document.getElementById('closeAdminBtn');
@@ -600,15 +528,9 @@ const confirmOkBtn = document.getElementById('confirmOkBtn');
 function initAudio() {
   if (!soundEnabled) return;
   try {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-  } catch (e) {
-    console.warn('AudioContext init failed', e);
-  }
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  } catch (e) {}
 }
 
 function playTickSound(frequency = 750, duration = 0.035, volume = 0.05) {
@@ -617,17 +539,13 @@ function playTickSound(frequency = 750, duration = 0.035, volume = 0.05) {
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     const now = audioCtx.currentTime;
-
     osc.type = 'triangle';
     osc.frequency.setValueAtTime(frequency, now);
     osc.frequency.exponentialRampToValueAtTime(320, now + duration);
-
     gain.gain.setValueAtTime(volume, now);
     gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
     osc.connect(gain);
     gain.connect(audioCtx.destination);
-
     osc.start(now);
     osc.stop(now + duration + 0.01);
   } catch (e) {}
@@ -643,17 +561,13 @@ function playFanfareSound() {
       const gain = audioCtx.createGain();
       const noteStart = now + idx * 0.09;
       const duration = 0.45;
-
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, noteStart);
-
       gain.gain.setValueAtTime(0, noteStart);
       gain.gain.linearRampToValueAtTime(0.08, noteStart + 0.02);
       gain.gain.exponentialRampToValueAtTime(0.0001, noteStart + duration);
-
       osc.connect(gain);
       gain.connect(audioCtx.destination);
-
       osc.start(noteStart);
       osc.stop(noteStart + duration + 0.02);
     });
@@ -663,9 +577,7 @@ function playFanfareSound() {
 function showToast(msg) {
   toastText.textContent = msg;
   toastNotification.classList.remove('opacity-0', 'translate-y-4');
-  setTimeout(() => {
-    toastNotification.classList.add('opacity-0', 'translate-y-4');
-  }, 2800);
+  setTimeout(() => toastNotification.classList.add('opacity-0', 'translate-y-4'), 2800);
 }
 
 function promptConfirm(title, msg, onOk) {
@@ -682,21 +594,13 @@ confirmCancelBtn.addEventListener('click', () => {
 
 confirmOkBtn.addEventListener('click', () => {
   customConfirmModal.close();
-  if (typeof pendingConfirmAction === 'function') {
-    pendingConfirmAction();
-  }
+  if (typeof pendingConfirmAction === 'function') pendingConfirmAction();
   pendingConfirmAction = null;
 });
 
 function saveState() {
   try {
-    const state = {
-      teams,
-      drawnOrder,
-      soundEnabled,
-      spinDurationSec,
-      draftText: teamTextarea.value
-    };
+    const state = { teams, drawnOrder, soundEnabled, spinDurationSec, draftText: teamTextarea.value };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch (e) {}
 }
@@ -728,15 +632,13 @@ function drawWheel() {
   const size = canvas.width;
   const center = size / 2;
   const radius = center - 52;
-  const pool = currentPool.length > 0 ? currentPool : teams;
+  const pool = isSpinning ? currentPool : getRemainingTeams();
   const sliceCount = pool.length;
 
   ctx.clearRect(0, 0, size, size);
-
   ctx.save();
   ctx.translate(center, center);
 
-  // Outer Multi-layer Metallic Bevel Rim
   const rimGrad = ctx.createRadialGradient(0, 0, radius - 18, 0, 0, radius + 42);
   rimGrad.addColorStop(0, '#0a100c');
   rimGrad.addColorStop(0.25, '#2f4534');
@@ -744,20 +646,17 @@ function drawWheel() {
   rimGrad.addColorStop(0.75, '#5c7f65');
   rimGrad.addColorStop(0.92, '#18271c');
   rimGrad.addColorStop(1, '#050906');
-
   ctx.fillStyle = rimGrad;
   ctx.beginPath();
   ctx.arc(0, 0, radius + 40, 0, Math.PI * 2);
   ctx.fill();
 
-  // Edge Neon Glow Ring (Lime-Gold)
   ctx.strokeStyle = '#22c55e';
   ctx.lineWidth = 4;
   ctx.beginPath();
   ctx.arc(0, 0, radius + 39, 0, Math.PI * 2);
   ctx.stroke();
 
-  // Mechanical Rivets / Pulsing LED Indicators around rim
   const rivetCount = 36;
   const now = performance.now() * 0.003;
   for (let i = 0; i < rivetCount; i++) {
@@ -766,7 +665,6 @@ function drawWheel() {
     const ry = Math.sin(angle) * (radius + 22);
     const isOrange = i % 2 === 0;
     const pulseFactor = 0.7 + 0.3 * Math.sin(now + i);
-
     ctx.beginPath();
     ctx.arc(rx, ry, (isOrange ? 5.5 : 4) * pulseFactor, 0, Math.PI * 2);
     ctx.fillStyle = isOrange ? '#ff7700' : '#84cc16';
@@ -776,26 +674,22 @@ function drawWheel() {
   }
   ctx.shadowBlur = 0;
 
-  // Segments Rotation
   ctx.save();
   ctx.rotate(rotationAngle);
 
   if (sliceCount > 0) {
     const anglePerSlice = (Math.PI * 2) / sliceCount;
-
     pool.forEach((team, i) => {
       const startAngle = -Math.PI / 2 + i * anglePerSlice;
       const endAngle = startAngle + anglePerSlice;
       const palette = SLICE_PALETTE[(team.id - 1) % SLICE_PALETTE.length];
-      const isWinnerSlice = !isSpinning && winningTeamId === team.id;
+      const isWinnerSlice = winningTeamId === team.id;
 
-      // Slice sector path
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.arc(0, 0, radius, startAngle, endAngle);
       ctx.closePath();
 
-      // Deep rich gradient
       const grad = ctx.createRadialGradient(0, 0, radius * 0.2, 0, 0, radius);
       grad.addColorStop(0, palette.bg2);
       grad.addColorStop(0.85, palette.bg1);
@@ -803,43 +697,33 @@ function drawWheel() {
       ctx.fillStyle = grad;
       ctx.fill();
 
-      // High-contrast Slice Boundary
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = '#050a06';
+      ctx.lineWidth = isWinnerSlice ? 6 : 3;
+      ctx.strokeStyle = isWinnerSlice ? '#fef08a' : '#050a06';
       ctx.stroke();
 
-      // Curved Rim Highlight Glass Arch
       ctx.beginPath();
       ctx.arc(0, 0, radius - 10, startAngle + 0.02, endAngle - 0.02);
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.42)';
       ctx.lineWidth = 5;
       ctx.stroke();
 
-      // Text Drawing: Oriented radially along segment without inverting or flipping
       ctx.save();
       const midAngle = startAngle + anglePerSlice / 2;
       ctx.rotate(midAngle);
       ctx.translate(radius * 0.60, 0);
-
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
       const title = team.name;
-      const maxRadialLength = radius * 0.52; // Available span along the sector radius
+      const maxRadialLength = radius * 0.52;
 
-      // Smart Multi-line for Long Team Names (e.g. สินเชื่อต่อเติมในฝัน ตราช้างในเฟืองใกล้ฉัน)
       if (title.length > 20) {
         const mid = Math.floor(title.length / 2);
         let splitPos = title.lastIndexOf(' ', mid + 4);
-        if (splitPos === -1 || splitPos < mid - 6) {
-          splitPos = title.indexOf(' ', mid - 4);
-        }
+        if (splitPos === -1 || splitPos < mid - 6) splitPos = title.indexOf(' ', mid - 4);
         if (splitPos === -1) splitPos = mid;
-
         const line1 = title.substring(0, splitPos).trim();
         const line2 = title.substring(splitPos).trim();
-
-        // Extra large font sizing for two lines (36px - 40px)
         let sz = 38;
         ctx.font = `800 ${sz}px "Kanit", sans-serif`;
         while (sz > 26 && (ctx.measureText(line1).width > maxRadialLength || ctx.measureText(line2).width > maxRadialLength)) {
@@ -847,46 +731,50 @@ function drawWheel() {
           ctx.font = `800 ${sz}px "Kanit", sans-serif`;
         }
         const lineSpacing = sz * 1.28;
-
-        // Pass 1: Heavy dark outline for absolute clarity against bright colors
         ctx.lineWidth = 8;
         ctx.strokeStyle = 'rgba(4, 9, 6, 0.95)';
         ctx.strokeText(line1, 0, -lineSpacing / 2);
         ctx.strokeText(line2, 0, lineSpacing / 2);
-
-        // Pass 2: Bright luminous text with soft glow
         ctx.fillStyle = '#ffffff';
         ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
         ctx.shadowBlur = 12;
         ctx.fillText(line1, 0, -lineSpacing / 2);
         ctx.fillText(line2, 0, lineSpacing / 2);
       } else {
-        // Dramatic single-line text sizing (48px - 54px)
         let sz = 50;
         ctx.font = `900 ${sz}px "Kanit", sans-serif`;
         while (sz > 30 && ctx.measureText(title).width > maxRadialLength) {
           sz -= 2;
           ctx.font = `900 ${sz}px "Kanit", sans-serif`;
         }
-
-        // Pass 1: Bold dark outline
         ctx.lineWidth = 9;
         ctx.strokeStyle = 'rgba(4, 9, 6, 0.95)';
         ctx.strokeText(title, 0, 0);
-
-        // Pass 2: Crisp white fill with drop shadow
         ctx.fillStyle = '#ffffff';
         ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
         ctx.shadowBlur = 14;
         ctx.fillText(title, 0, 0);
       }
-
       ctx.restore();
     });
-  }
+  } else {
+    // Wheel completed - display all done state
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.fillStyle = '#0a140d';
+    ctx.fill();
+    ctx.strokeStyle = '#22c55e';
+    ctx.lineWidth = 4;
+    ctx.stroke();
 
-  ctx.restore(); // end slice rotation
-  ctx.restore(); // end center translation
+    ctx.fillStyle = '#84cc16';
+    ctx.font = '800 42px "Kanit", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('สุ่มครบทุกทีมแล้ว!', 0, 0);
+  }
+  ctx.restore();
+  ctx.restore();
 }
 
 function spinWheel() {
@@ -918,10 +806,8 @@ function spinWheel() {
   }
   const winningTeam = currentPool[winnerIndex];
 
-  // Target alignment under 12 o'clock pointer
   const anglePerSlice = (Math.PI * 2) / poolLen;
   const sliceTargetAngle = -(winnerIndex + 0.5) * anglePerSlice;
-  
   const jitter = (Math.random() - 0.5) * anglePerSlice * 0.45;
   const currentAngle = rotationAngle % (Math.PI * 2);
   const targetEndBase = sliceTargetAngle + jitter;
@@ -934,9 +820,7 @@ function spinWheel() {
   const durationMs = spinDurationSec * 1000;
   const startAngle = rotationAngle;
 
-  function cubicEaseOut(t) {
-    return 1 - Math.pow(1 - t, 3.4);
-  }
+  function cubicEaseOut(t) { return 1 - Math.pow(1 - t, 3.4); }
 
   function frame(currentTime) {
     const elapsed = Math.max(0, currentTime - startTime);
@@ -946,7 +830,6 @@ function spinWheel() {
     rotationAngle = startAngle + (finalTargetAngle - startAngle) * ease;
     drawWheel();
 
-    // Sector ticking sound & indicator recoil
     const currentNorm = (rotationAngle + Math.PI / 2) % (Math.PI * 2);
     const currentSector = Math.floor(((currentNorm + Math.PI * 2) % (Math.PI * 2)) / anglePerSlice);
 
@@ -955,11 +838,8 @@ function spinWheel() {
       lastTickTime = currentTime;
       const freq = 700 + (1 - progress) * 220;
       playTickSound(freq, 0.035, 0.045);
-
       wheelPointer.style.transform = 'translateX(-50%) rotate(-16deg)';
-      setTimeout(() => {
-        wheelPointer.style.transform = 'translateX(-50%) rotate(0deg)';
-      }, 70);
+      setTimeout(() => { wheelPointer.style.transform = 'translateX(-50%) rotate(0deg)'; }, 70);
     }
 
     if (progress < 1) {
@@ -968,7 +848,6 @@ function spinWheel() {
       finishSpin(winningTeam);
     }
   }
-
   requestAnimationFrame(frame);
 }
 
@@ -981,43 +860,55 @@ function finishSpin(winner) {
 
   drawnOrder.push(winner.id);
   saveState();
-  updateQueueUI();
-  updateControls();
-  drawWheel();
 
+  // Highlight winning slice briefly
+  drawWheel();
   playFanfareSound();
   launchSparks();
 
   const rank = drawnOrder.length;
   winnerRankNum.textContent = '#' + String(rank).padStart(2, '0');
   winnerTeamName.textContent = winner.name;
-  modalDrawnCount.textContent = rank;
-  modalRemainCount.textContent = teams.length - rank;
+  const remainingCount = teams.length - rank;
 
-  winnerModal.classList.remove('opacity-0', 'pointer-events-none');
-  winnerModalCard.classList.remove('scale-90');
-  winnerModalCard.classList.add('scale-100');
+  if (modalNextBtnText) {
+    modalNextBtnText.textContent = remainingCount === 0 ? 'ดูสรุปลำดับทั้งหมด' : 'สุ่มทีมถัดไป';
+  }
+
+  // Remove won team from the wheel pool before modal opens
+  setTimeout(() => {
+    winningTeamId = null;
+    currentPool = getRemainingTeams();
+    drawWheel();
+    updateQueueUI();
+    updateControls();
+
+    winnerModal.classList.remove('opacity-0', 'pointer-events-none');
+    winnerModalCard.classList.remove('scale-90');
+    winnerModalCard.classList.add('scale-100');
+  }, 450);
 }
 
 function closeWinnerModal() {
   winnerModal.classList.add('opacity-0', 'pointer-events-none');
   winnerModalCard.classList.remove('scale-100');
   winnerModalCard.classList.add('scale-90');
+  winningTeamId = null;
+  currentPool = getRemainingTeams();
+  drawWheel();
+  updateControls();
 }
 
 modalBackToWheelBtn.addEventListener('click', closeWinnerModal);
 modalXCloseBtn.addEventListener('click', closeWinnerModal);
-
-winnerModal.addEventListener('click', (e) => {
-  if (e.target === winnerModal) {
-    closeWinnerModal();
-  }
-});
+winnerModal.addEventListener('click', (e) => { if (e.target === winnerModal) closeWinnerModal(); });
 
 modalNextBtn.addEventListener('click', () => {
   closeWinnerModal();
   if (drawnOrder.length < teams.length) {
     setTimeout(spinWheel, 300);
+  } else {
+    setTimeout(() => adminDialog.showModal(), 300);
   }
 });
 
@@ -1039,16 +930,11 @@ function launchSparks() {
     const angle = Math.random() * (Math.PI * 2);
     const speed = 4 + Math.random() * 16;
     particles.push({
-      x: startX,
-      y: startY,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed - 3,
-      size: 4 + Math.random() * 7,
-      isRibbon: Math.random() > 0.45,
-      color: colors[i % colors.length],
-      alpha: 1,
-      rotation: Math.random() * (Math.PI * 2),
-      vRot: (Math.random() - 0.5) * 0.25
+      x: startX, y: startY,
+      vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed - 3,
+      size: 4 + Math.random() * 7, isRibbon: Math.random() > 0.45,
+      color: colors[i % colors.length], alpha: 1,
+      rotation: Math.random() * (Math.PI * 2), vRot: (Math.random() - 0.5) * 0.25
     });
   }
 
@@ -1056,38 +942,24 @@ function launchSparks() {
   function sparkFrame(now) {
     const elapsed = now - startTime;
     sparksCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
     particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vy += 0.28; // gravity
-      p.vx *= 0.985;
-      p.rotation += p.vRot;
-      p.alpha = Math.max(0, 1 - elapsed / 2400);
-
+      p.x += p.vx; p.y += p.vy; p.vy += 0.28; p.vx *= 0.985;
+      p.rotation += p.vRot; p.alpha = Math.max(0, 1 - elapsed / 2400);
       sparksCtx.save();
       sparksCtx.globalAlpha = p.alpha;
       sparksCtx.translate(p.x, p.y);
       sparksCtx.rotate(p.rotation);
       sparksCtx.fillStyle = p.color;
-
       if (p.isRibbon) {
         sparksCtx.fillRect(-p.size / 2, -p.size / 2, p.size * 2, p.size);
       } else {
-        sparksCtx.beginPath();
-        sparksCtx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-        sparksCtx.fill();
+        sparksCtx.beginPath(); sparksCtx.arc(0, 0, p.size / 2, 0, Math.PI * 2); sparksCtx.fill();
       }
       sparksCtx.restore();
     });
-
-    if (elapsed < 2400) {
-      requestAnimationFrame(sparkFrame);
-    } else {
-      sparksCanvas.classList.add('hidden');
-    }
+    if (elapsed < 2400) requestAnimationFrame(sparkFrame);
+    else sparksCanvas.classList.add('hidden');
   }
-
   requestAnimationFrame(sparkFrame);
 }
 
@@ -1095,7 +967,6 @@ function updateQueueUI() {
   queueListContainer.innerHTML = '';
   const total = teams.length;
   const drawn = drawnOrder.length;
-
   queueCountBadge.textContent = `${drawn} / ${total}`;
   emptyQueueNotice.classList.toggle('hidden', drawn > 0);
 
@@ -1104,13 +975,9 @@ function updateQueueUI() {
     if (!team) return;
     const item = document.createElement('div');
     const isLatest = index === drawn - 1;
-
     item.className = `p-2.5 rounded-xl border flex items-center justify-between transition-all ${
-      isLatest
-        ? 'bg-lime-500/15 border-lime-500/50 shadow-md shadow-lime-500/10'
-        : 'bg-[#080d0a] border-white/10'
+      isLatest ? 'bg-lime-500/15 border-lime-500/50 shadow-md shadow-lime-500/10' : 'bg-[#080d0a] border-white/10'
     }`;
-
     item.innerHTML = `
       <div class="flex items-center gap-3">
         <span class="w-7 h-7 rounded-lg ${isLatest ? 'bg-lime-500 text-black' : 'bg-white/10 text-white/70'} flex items-center justify-center text-xs font-mono font-bold">
@@ -1122,7 +989,6 @@ function updateQueueUI() {
     `;
     queueListContainer.appendChild(item);
   });
-
   queueListContainer.scrollTop = queueListContainer.scrollHeight;
 }
 
@@ -1137,10 +1003,11 @@ function updateControls() {
     hubStatusBadge.textContent = 'จบการสุ่ม';
     remainingHint.textContent = `สุ่มครบแล้ว ${total} ทีม`;
   } else {
+    hubPrimaryText.textContent = 'SPIN';
+    hubSubText.textContent = 'กดเพื่อหมุน';
     hubStatusBadge.textContent = `คิวที่ ${nextRank}`;
     remainingHint.textContent = `เหลือ ${remaining} จาก ${total} ทีม`;
   }
-
   centerSpinBtn.disabled = isSpinning || remaining === 0;
   inputCountTag.textContent = `${teams.length} ทีม`;
 }
@@ -1158,7 +1025,6 @@ function parseAndApplyTeams(rawText) {
     return false;
   }
   inputErrorMsg.classList.add('hidden');
-
   teams = lines.map((name, i) => ({ id: i + 1, name }));
   drawnOrder = [];
   currentPool = [...teams];
@@ -1173,51 +1039,24 @@ function parseAndApplyTeams(rawText) {
 
 applyTeamsBtn.addEventListener('click', () => {
   if (drawnOrder.length > 0) {
-    promptConfirm(
-      'เปลี่ยนรายชื่อทีม?',
-      `การอัปเดตรายชื่อใหม่จะล้างผลการสุ่มเดิม (${drawnOrder.length} ทีม) และเริ่มใหม่ ยืนยันหรือไม่?`,
-      () => {
-        if (parseAndApplyTeams(teamTextarea.value)) {
-          adminDialog.close();
-        }
-      }
-    );
+    promptConfirm('เปลี่ยนรายชื่อทีม?', `การอัปเดตรายชื่อใหม่จะล้างผลการสุ่มเดิม (${drawnOrder.length} ทีม) และเริ่มใหม่ ยืนยันหรือไม่?`, () => {
+      if (parseAndApplyTeams(teamTextarea.value)) adminDialog.close();
+    });
   } else {
-    if (parseAndApplyTeams(teamTextarea.value)) {
-      adminDialog.close();
-    }
+    if (parseAndApplyTeams(teamTextarea.value)) adminDialog.close();
   }
 });
 
-loadSampleBtn.addEventListener('click', () => {
-  teamTextarea.value = DEFAULT_SAMPLE_TEAMS.join('\n');
-  inputErrorMsg.classList.add('hidden');
-});
-
-clearInputBtn.addEventListener('click', () => {
-  teamTextarea.value = '';
-  teamTextarea.focus();
-});
+loadSampleBtn.addEventListener('click', () => { teamTextarea.value = DEFAULT_SAMPLE_TEAMS.join('\n'); inputErrorMsg.classList.add('hidden'); });
+clearInputBtn.addEventListener('click', () => { teamTextarea.value = ''; teamTextarea.focus(); });
 
 resetOrderBtn.addEventListener('click', () => {
-  if (drawnOrder.length === 0) {
-    showToast('ยังไม่มีผลการสุ่มที่ต้องล้าง');
-    return;
-  }
-  promptConfirm(
-    'เริ่มการสุ่มใหม่?',
-    `ล้างลำดับที่สุ่มไปแล้วทั้งหมด ${drawnOrder.length} ทีม และนำทุกทีมกลับมาในวงล้อ?`,
-    () => {
-      drawnOrder = [];
-      currentPool = [...teams];
-      rotationAngle = 0;
-      saveState();
-      updateQueueUI();
-      updateControls();
-      drawWheel();
-      showToast('รีเซ็ตลำดับเรียบร้อยแล้ว');
-    }
-  );
+  if (drawnOrder.length === 0) { showToast('ยังไม่มีผลการสุ่มที่ต้องล้าง'); return; }
+  promptConfirm('เริ่มการสุ่มใหม่?', `ล้างลำดับที่สุ่มไปแล้วทั้งหมด ${drawnOrder.length} ทีม และนำทุกทีมกลับมาในวงล้อ?`, () => {
+    drawnOrder = []; currentPool = [...teams]; rotationAngle = 0;
+    saveState(); updateQueueUI(); updateControls(); drawWheel();
+    showToast('รีเซ็ตลำดับเรียบร้อยแล้ว');
+  });
 });
 
 undoLastBtn.addEventListener('click', () => {
@@ -1225,24 +1064,14 @@ undoLastBtn.addEventListener('click', () => {
   const removedId = drawnOrder.pop();
   const removedTeam = teams.find(t => t.id === removedId);
   currentPool = getRemainingTeams();
-  saveState();
-  updateQueueUI();
-  updateControls();
-  drawWheel();
+  saveState(); updateQueueUI(); updateControls(); drawWheel();
   showToast(`นำ "${removedTeam ? removedTeam.name : 'ทีม'}" กลับเข้าสู่วงล้อแล้ว`);
 });
 
 copyQueueBtn.addEventListener('click', () => {
-  if (drawnOrder.length === 0) {
-    showToast('ยังไม่มีรายชื่อที่สุ่มได้');
-    return;
-  }
-  const rows = drawnOrder.map((id, idx) => {
-    const team = teams.find(t => t.id === id);
-    return `${idx + 1}. ${team ? team.name : ''}`;
-  });
+  if (drawnOrder.length === 0) { showToast('ยังไม่มีรายชื่อที่สุ่มได้'); return; }
+  const rows = drawnOrder.map((id, idx) => `${idx + 1}. ${teams.find(t => t.id === id)?.name || ''}`);
   const text = `ลำดับการนำเสนอ: BEYOND 20 SMARTX 2026\n(สยามคูโบต้า ลีสซิ่ง 20th Anniversary)\n\n` + rows.join('\n');
-
   try {
     const tempTextarea = document.createElement('textarea');
     tempTextarea.value = text;
@@ -1251,38 +1080,23 @@ copyQueueBtn.addEventListener('click', () => {
     document.execCommand('copy');
     document.body.removeChild(tempTextarea);
     showToast('คัดลอกลำดับนำเสนอลงคลิปบอร์ดแล้ว');
-  } catch (e) {
-    showToast('ไม่สามารถคัดลอกได้');
-  }
+  } catch (e) { showToast('ไม่สามารถคัดลอกได้'); }
 });
 
 exportCsvBtn.addEventListener('click', () => {
-  if (drawnOrder.length === 0) {
-    showToast('ยังไม่มีรายชื่อที่สุ่มได้');
-    return;
-  }
+  if (drawnOrder.length === 0) { showToast('ยังไม่มีรายชื่อที่สุ่มได้'); return; }
   const lines = ['ลำดับที่,ชื่อทีม'];
-  drawnOrder.forEach((id, idx) => {
-    const team = teams.find(t => t.id === id);
-    lines.push(`"${idx + 1}","${(team ? team.name : '').replace(/"/g, '""')}"`);
-  });
+  drawnOrder.forEach((id, idx) => lines.push(`"${idx + 1}","${(teams.find(t => t.id === id)?.name || '').replace(/"/g, '""')}"`));
   const csvContent = '\uFEFF' + lines.join('\r\n');
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = `SKL_SMARTX_2026_Presentation_Order.csv`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  a.href = url; a.download = `SKL_SMARTX_2026_Presentation_Order.csv`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
   showToast('ดาวน์โหลดไฟล์ CSV เรียบร้อยแล้ว');
 });
 
-spinDurationSelect.addEventListener('change', (e) => {
-  spinDurationSec = Number(e.target.value) || 10;
-  saveState();
-});
+spinDurationSelect.addEventListener('change', (e) => { spinDurationSec = Number(e.target.value) || 10; saveState(); });
 
 soundBtn.addEventListener('click', () => {
   soundEnabled = !soundEnabled;
@@ -1290,58 +1104,39 @@ soundBtn.addEventListener('click', () => {
   soundIcon.innerHTML = soundEnabled
     ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`
     : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>`;
-  initAudio();
-  saveState();
-  showToast(soundEnabled ? 'เปิดเสียงเอฟเฟกต์แล้ว' : 'ปิดเสียงแล้ว');
+  initAudio(); saveState(); showToast(soundEnabled ? 'เปิดเสียงเอฟเฟกต์แล้ว' : 'ปิดเสียงแล้ว');
 });
 
 screenBtn.addEventListener('click', () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(() => {});
-  } else {
-    document.exitFullscreen().catch(() => {});
-  }
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+  else document.exitFullscreen().catch(() => {});
 });
 
 adminBtn.addEventListener('click', () => adminDialog.showModal());
 closeAdminBtn.addEventListener('click', () => adminDialog.close());
-
-centerSpinBtn.addEventListener('click', () => {
-  if (!isSpinning) spinWheel();
-});
-
-canvas.addEventListener('click', () => {
-  if (!isSpinning) spinWheel();
-});
+centerSpinBtn.addEventListener('click', () => { if (!isSpinning) spinWheel(); });
+canvas.addEventListener('click', () => { if (!isSpinning) spinWheel(); });
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    if (!winnerModal.classList.contains('pointer-events-none')) {
-      closeWinnerModal();
-      return;
-    }
+    if (!winnerModal.classList.contains('pointer-events-none')) { closeWinnerModal(); return; }
   }
   if (e.code === 'Space' && !e.repeat) {
     const activeTag = document.activeElement ? document.activeElement.tagName : '';
     if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(activeTag)) return;
     if (adminDialog.open || customConfirmModal.open || !winnerModal.classList.contains('pointer-events-none')) return;
     e.preventDefault();
-    if (!isSpinning && getRemainingTeams().length > 0) {
-      spinWheel();
-    }
+    if (!isSpinning && getRemainingTeams().length > 0) spinWheel();
   }
 });
 
 window.addEventListener('load', () => {
-  const hasLoaded = loadState();
-  if (!hasLoaded) {
+  if (!loadState()) {
     teamTextarea.value = DEFAULT_SAMPLE_TEAMS.join('\n');
     parseAndApplyTeams(teamTextarea.value);
   } else {
     currentPool = getRemainingTeams();
-    updateQueueUI();
-    updateControls();
-    drawWheel();
+    updateQueueUI(); updateControls(); drawWheel();
   }
 });
 
