@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#060907">
+<meta name="description" content="วงล้อสุ่มลำดับนำเสนอ BEYOND 20 SMARTX 2026 สำหรับ Canva Presentation">
+<title>BEYOND 20 SMARTX — วงล้อสุ่มลำดับนำเสนอ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Kanit', 'sans-serif'],
+          mono: ['Orbitron', 'sans-serif'],
+        },
+        colors: {
+          skl: {
+            orange: '#ff7700',
+            gold: '#ffb300',
+            green: '#22c55e',
+            lime: '#84cc16',
+            dark: '#060907',
+            panel: '#0d1510',
+            border: '#203224',
+          }
+        }
+      }
+    }
+  }
+</script>
+<style>
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #0e1b12 0%, #070e0a 55%, #020503 100%);
+  color: #f1f7ed;
+  font-family: 'Kanit', sans-serif;
+  user-select: none;
+}
+/* Cyber Floor Grid */
+.stage-grid {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(163, 230, 53, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 119, 0, 0.05) 1px, transparent 1px);
+  background-size: 45px 45px;
+  mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.95) 25%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+/* Overhead Stage Spotlight */
+.spotlight-cone {
+  position: fixed;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100vw, 950px);
+  height: 90vh;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 180, 0, 0.16) 0%, rgba(132, 204, 22, 0.08) 40%, transparent 75%);
+  pointer-events: none;
+  filter: blur(24px);
+  z-index: 1;
+}
+/* Dual Dynamic Stage Laser Beams */
+.stage-laser-left {
+  position: fixed;
+  top: -5%;
+  left: 2%;
+  width: 280px;
+  height: 110vh;
+  background: linear-gradient(125deg, rgba(255, 119, 0, 0.18) 0%, transparent 60%);
+  border-right: 1.5px solid rgba(255, 140, 26, 0.4);
+  filter: drop-shadow(0 0 25px #ff7700);
+  transform: skewX(-14deg);
+  pointer-events: none;
+  animation: laser-pulse 8s ease-in-out infinite alternate;
+  z-index: 1;
+}
+.stage-laser-right {
+  position: fixed;
+  top: -5%;
+  right: 2%;
+  width: 280px;
+  height: 110vh;
+  background: linear-gradient(-125deg, rgba(34, 197, 94, 0.18) 0%, transparent 60%);
+  border-left: 1.5px solid rgba(34, 197, 94, 0.4);
+  filter: drop-shadow(0 0 25px #22c55e);
+  transform: skewX(14deg);
+  pointer-events: none;
+  animation: laser-pulse 8s ease-in-out infinite alternate-reverse;
+  z-index: 1;
+}
+@keyframes laser-pulse {
+  0% { opacity: 0.35; transform: skewX(-12deg) scaleX(0.95); }
+  100% { opacity: 0.75; transform: skewX(-16deg) scaleX(1.05); }
+}
+.wheel-halo {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 2px dashed rgba(163, 230, 53, 0.4);
+  animation: halo-rotate 35s linear infinite;
+  pointer-events: none;
+}
+.wheel-halo::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #ff9800;
+  border-bottom-color: #22c55e;
+  border-left-color: rgba(255, 215, 0, 0.4);
+  filter: drop-shadow(0 0 22px rgba(255, 152, 0, 0.65));
+  animation: halo-counter 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes halo-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes halo-counter {
+  0% { transform: rotate(0deg) scale(0.99); }
+  50% { transform: rotate(-180deg) scale(1.03); }
+  100% { transform: rotate(-360deg) scale(0.99); }
+}
+.wheel-pointer {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: 50% 14px;
+  width: 48px;
+  height: 72px;
+  z-index: 25;
+  filter: drop-shadow(0 6px 22px rgba(255, 170, 0, 0.95));
+  transition: transform 0.08s cubic-bezier(0.2, 1.8, 0.4, 1);
+  pointer-events: none;
+}
+.wheel-pointer-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #fff2b2 0%, #ff7700 60%, #b43805 100%);
+  clip-path: polygon(50% 100%, 0% 14%, 25% 0%, 75% 0%, 100% 14%);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
+}
+.wheel-pointer-inner::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: linear-gradient(180deg, #ffffff 0%, #ffd047 45%, #9a3412 100%);
+  clip-path: polygon(50% 95%, 7% 16%, 28% 4%, 72% 4%, 93% 16%);
+}
+.center-hub-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #253c2b 0%, #0d1712 60%, #030704 100%);
+  border: 4px solid #86b36a;
+  box-shadow: 
+    0 0 0 5px #09100a,
+    0 0 0 9px #ff8c1a,
+    0 0 38px rgba(255, 140, 26, 0.55),
+    inset 0 0 25px rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  outline: none;
+}
+.center-hub-btn:hover:not(:disabled) {
+  transform: translate(-50%, -50%) scale(1.06);
+  border-color: #bef264;
+  box-shadow: 
+    0 0 0 5px #09100a,
+    0 0 0 10px #ffd047,
+    0 0 55px rgba(255, 208, 71, 0.85),
+    inset 0 0 25px rgba(0, 0, 0, 0.9);
+}
+.center-hub-btn:active:not(:disabled) {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+.hub-radar {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 2px dashed rgba(163, 230, 53, 0.4);
+  animation: halo-rotate 16s linear infinite;
+  pointer-events: none;
+}
+.spin-active .center-hub-btn {
+  border-color: #ffd047;
+  box-shadow: 
+    0 0 0 5px #09100a,
+    0 0 0 9px #84cc16,
+    0 0 70px rgba(132, 204, 22, 0.9),
+    inset 0 0 30px rgba(255, 148, 26, 0.7);
+  animation: hub-pulse 0.8s ease-in-out infinite alternate;
+}
+@keyframes hub-pulse {
+  from { transform: translate(-50%, -50%) scale(0.97); }
+  to { transform: translate(-50%, -50%) scale(1.03); }
+}
+dialog {
+  border: none;
+  background: transparent;
+  color: inherit;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: auto;
+  padding: 0;
+}
+dialog::backdrop {
+  background: rgba(2, 4, 3, 0.88);
+  backdrop-filter: blur(12px);
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #080d09;
+}
+::-webkit-scrollbar-thumb {
+  background: #253727;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f5f42;
+}
+</style>
+</head>
+<body class="relative w-screen h-screen flex flex-col items-center justify-center select-none overflow-hidden">
+<div class="stage-grid" aria-hidden="true"></div>
+
+<!-- Ambient Lighting Blurs & Stage Spotlights -->
+<div class="spotlight-cone" aria-hidden="true"></div>
+<div class="stage-laser-left" aria-hidden="true"></div>
+<div class="stage-laser-right" aria-hidden="true"></div>
+<div class="fixed top-1/4 left-1/4 w-96 h-96 bg-orange-600/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="fixed bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+<!-- Floating Discrete Action Bar (Hidden in corner, high accessibility on hover/tap) -->
+<div class="fixed top-3 right-3 z-40 flex items-center gap-2 opacity-25 hover:opacity-100 transition-opacity duration-300">
+  <!-- Sound Toggle -->
+  <button id="soundBtn" type="button" class="p-2 sm:px-3 sm:py-2 rounded-xl bg-black/60 hover:bg-black/90 border border-white/10 text-white/80 hover:text-white transition flex items-center gap-1.5 text-xs backdrop-blur-md shadow-lg" title="เปิด/ปิดเสียง">
+    <svg id="soundIcon" class="w-4 h-4 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+    <span class="hidden md:inline" id="soundLabel">เสียง</span>
+  </button>
+  <!-- Fullscreen Toggle -->
+  <button id="screenBtn" type="button" class="p-2 sm:px-3 sm:py-2 rounded-xl bg-black/60 hover:bg-black/90 border border-white/10 text-white/80 hover:text-white transition flex items-center gap-1.5 text-xs backdrop-blur-md shadow-lg" title="เต็มจอ (F11)">
+    <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+  </button>
+  <!-- Hidden Admin Drawer Toggle -->
+  <button id="adminBtn" type="button" class="px-3 py-2 rounded-xl bg-gradient-to-r from-orange-600/90 to-amber-500/90 hover:from-orange-500 hover:to-amber-400 text-black font-extrabold transition flex items-center gap-2 text-xs shadow-xl backdrop-blur-md" title="จัดการรายชื่อทีม">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+    <span class="tracking-wide">จัดการรายชื่อ</span>
+  </button>
+</div>
+
+<main class="relative z-10 flex flex-col items-center justify-center w-full h-full p-2">
+  <!-- Wheel Wrapper Container: Maximized for Presentation -->
+  <div class="relative w-[min(90vw,calc(100vh-80px),720px)] aspect-square flex items-center justify-center my-auto">
+    <!-- Glowing Pulsing Backdrops -->
+    <div class="absolute inset-4 rounded-full bg-gradient-to-tr from-orange-500/15 via-lime-500/10 to-transparent blur-3xl pointer-events-none"></div>
+    <div class="wheel-halo"></div>
+
+    <!-- Outer Pointer Indicator (12 o'clock) -->
+    <div id="wheelPointer" class="wheel-pointer">
+      <div class="wheel-pointer-inner"></div>
+    </div>
+
+    <!-- Master Wheel Canvas -->
+    <canvas id="wheelCanvas" width="1400" height="1400" class="w-full h-full drop-shadow-[0_16px_45px_rgba(0,0,0,0.9)] cursor-pointer"></canvas>
+
+    <!-- Center Tactile Button (NO LOGO, CLICK TO SPIN) -->
+  <button id="centerSpinBtn" class="center-hub-btn group" title="คลิกเพื่อหมุนวงล้อ">
+    <div class="hub-radar"></div>
+    
+    <!-- Primary Action Indicator -->
+    <div class="flex flex-col items-center justify-center z-10 pointer-events-none transition-transform group-hover:scale-110">
+      <span id="hubPrimaryText" class="text-xl sm:text-2xl md:text-3xl font-black font-mono tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-lime-300 drop-shadow-[0_2px_10px_rgba(255,200,0,0.5)]">
+        SPIN
+      </span>
+      <span id="hubSubText" class="text-[9px] sm:text-[11px] text-lime-400 font-sans tracking-widest uppercase font-semibold mt-0.5">
+        กดเพื่อหมุน
+      </span>
+    </div>
+
+    <!-- Live Queue Mini Badge inside Hub -->
+    <div id="hubStatusBadge" class="absolute bottom-3 sm:bottom-4 px-2 py-0.5 rounded-full bg-black/60 border border-white/10 text-[9px] sm:text-[10px] text-amber-300 font-mono tracking-wider">
+      คิวที่ 1
+    </div>
+  </button>
+</div>
+
+<!-- Discreet Bottom Ticker (Minimalist feedback) -->
+<div class="mt-2 flex items-center gap-2 text-xs text-white/50 z-20">
+  <span id="remainingHint" class="text-lime-400 font-medium font-mono">5 ทีมพร้อมขึ้นเวที</span>
+  <span class="text-white/20">•</span>
+  <span class="text-white/40 hidden sm:inline">กด Spacebar หรือคลิกวงล้อเพื่อหมุน</span>
+</div>
+</main>
+
+<div id="winnerModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+  <div class="relative w-full max-w-lg p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#142017] via-[#0d1610] to-[#070b08] border-2 border-lime-400/50 shadow-[0_0_80px_rgba(34,197,94,0.35)] text-center transform scale-90 transition-transform duration-300" id="winnerModalCard">
+    <!-- Close 'X' Button -->
+    <button id="modalXCloseBtn" type="button" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white flex items-center justify-center transition cursor-pointer" aria-label="กลับสู่หน้าวงล้อ">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+
+    <!-- Top Trophy Badge -->
+    <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto -mt-12 sm:-mt-14 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-300 to-lime-400 p-0.5 shadow-xl shadow-orange-500/30 flex items-center justify-center">
+      <div class="w-full h-full rounded-2xl bg-[#0c140f] flex items-center justify-center">
+        <span id="winnerRankNum" class="text-2xl sm:text-3xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-lime-300">
+          #01
+        </span>
+      </div>
+    </div>
+
+    <!-- Announcement Content -->
+    <div class="mt-4">
+      <div class="inline-block px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-300 text-xs font-semibold tracking-wider uppercase mb-2">
+        ลำดับนำเสนอนี้เป็นของ
+      </div>
+      <h2 id="winnerTeamName" class="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-lime-200 to-amber-200 my-3 px-2 break-words drop-shadow-[0_0_25px_rgba(163,230,53,0.45)] leading-snug">
+        CAMPAIGN HUB
+      </h2>
+      <p class="text-xs sm:text-base text-lime-400 font-semibold tracking-wide">
+        ★ BEYOND 20 SMARTX — เวทีนี้เป็นของคุณ ★
+      </p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="mt-6 py-3 px-4 rounded-xl bg-black/40 border border-white/10 flex justify-around text-xs text-white/70">
+      <div>ได้ลำดับแล้ว: <span id="modalDrawnCount" class="text-white font-mono font-bold">1</span> ทีม</div>
+      <div class="text-white/20">|</div>
+      <div>รอขึ้นเวทีอีก: <span id="modalRemainCount" class="text-lime-400 font-mono font-bold">4</span> ทีม</div>
+    </div>
+
+    <!-- Modal Actions -->
+    <div class="mt-6 flex flex-wrap gap-3 justify-center">
+      <button id="modalBackToWheelBtn" type="button" class="flex-1 min-w-[130px] py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-lg cursor-pointer">
+        <svg class="w-4 h-4 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        <span>กลับหน้าวงล้อ</span>
+      </button>
+      <button id="modalNextBtn" type="button" class="flex-1 min-w-[130px] py-3 px-6 rounded-xl bg-gradient-to-r from-orange-500 to-amber-400 hover:brightness-110 text-black font-extrabold text-sm shadow-lg shadow-orange-500/25 transition flex items-center justify-center gap-2 cursor-pointer">
+        <span>สุ่มทีมถัดไป</span>
+        <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Confetti Celebration Canvas (Fixes null getContext error) -->
+<canvas id="sparksCanvas" class="fixed inset-0 pointer-events-none z-40 hidden"></canvas>
+
+<!-- Hidden Backstage Admin Console -->
+<dialog id="adminDialog" class="w-full max-w-4xl p-4 sm:p-6 rounded-3xl bg-[#0c130f] border border-lime-500/30 text-white shadow-2xl backdrop-blur-2xl">
+  <div class="flex items-center justify-between pb-4 border-b border-white/10">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-lime-500 p-0.5 flex items-center justify-center">
+        <div class="w-full h-full bg-[#0c130f] rounded-xl flex items-center justify-center">
+          <svg class="w-5 h-5 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-white">จัดการรายชื่อทีม & ลำดับนำเสนอ</h3>
+        <p class="text-xs text-white/50">ตั้งค่ารายชื่อสำหรับเปิดใน Canva หรือใช้งานบนเวที</p>
+      </div>
+    </div>
+    <button id="closeAdminBtn" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+  </div>
+
+  <!-- Content Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4 max-h-[72vh] overflow-y-auto pr-1">
+    <!-- Left Column: Input and Speeds -->
+    <div class="flex flex-col gap-4">
+      <div class="p-4 rounded-2xl bg-black/40 border border-white/10">
+        <div class="flex items-center justify-between mb-2">
+          <label for="teamTextarea" class="text-xs font-bold text-lime-400 uppercase tracking-wider">
+            01 / รายชื่อทีม (บรรทัดละ 1 ชื่อ)
+          </label>
+          <span id="inputCountTag" class="text-xs font-mono text-white/50">5 ทีม</span>
+        </div>
+        <textarea id="teamTextarea" rows="7" class="w-full p-3 rounded-xl bg-[#070b08] border border-white/15 text-sm text-white placeholder-white/30 focus:border-lime-400 focus:outline-none focus:ring-1 focus:ring-lime-400 font-sans leading-relaxed resize-none"></textarea>
+        
+        <p id="inputErrorMsg" class="text-xs text-rose-400 mt-1 hidden"></p>
+
+        <!-- Actions -->
+        <div class="flex items-center justify-between gap-2 mt-3">
+          <div class="flex gap-2">
+            <button id="loadSampleBtn" type="button" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-white/70 hover:text-white transition">
+              ตัวอย่าง 5 ทีม
+            </button>
+            <button id="clearInputBtn" type="button" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-rose-300 transition">
+              ล้างข้อความ
+            </button>
+          </div>
+          <button id="applyTeamsBtn" type="button" class="px-4 py-2 rounded-xl bg-gradient-to-r from-lime-500 to-emerald-400 hover:brightness-110 text-black font-bold text-xs shadow-md transition">
+            อัปเดตวงล้อ
+          </button>
+        </div>
+      </div>
+
+      <!-- Settings Block -->
+      <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex flex-col gap-3">
+        <div class="text-xs font-bold text-orange-400 uppercase tracking-wider">02 / ความเร็วการหมุน</div>
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-white/70">ระยะเวลาการหมุน</span>
+          <select id="spinDurationSelect" class="bg-[#070b08] border border-white/20 rounded-lg px-3 py-1.5 text-white text-xs focus:outline-none focus:border-orange-400">
+            <option value="5">5 วินาที (เร็วทันใจ)</option>
+            <option value="8">8 วินาที (มาตรฐาน)</option>
+            <option value="10" selected>10 วินาที (ลุ้นกำลังดี)</option>
+            <option value="12">12 วินาที (ตื่นเต้น)</option>
+            <option value="15">15 วินาที (งานใหญ่)</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-between text-xs pt-2 border-t border-white/5">
+          <span class="text-white/70">รีเซ็ตผลการสุ่มทั้งหมด</span>
+          <button id="resetOrderBtn" type="button" class="px-3 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 text-xs transition">
+            ล้างลำดับเริ่มใหม่
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Queue & Drawn Order -->
+    <div class="flex flex-col gap-4">
+      <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex flex-col h-full">
+        <div class="flex items-center justify-between mb-3">
+          <div class="text-xs font-bold text-amber-300 uppercase tracking-wider">
+            03 / ผลการสุ่มลำดับ
+          </div>
+          <span id="queueCountBadge" class="px-2 py-0.5 rounded-full bg-white/10 text-xs font-mono text-lime-400">
+            0 / 5
+          </span>
+        </div>
+
+        <!-- Drawn List Container -->
+        <div id="queueListContainer" class="flex-1 overflow-y-auto max-h-[290px] flex flex-col gap-1.5 pr-1">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyQueueNotice" class="py-12 flex flex-col items-center justify-center text-center text-white/40">
+          <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-2 text-xl font-mono">20</div>
+          <p class="text-xs">ยังไม่มีการสุ่มลำดับ</p>
+          <p class="text-[11px] text-white/30">กดหมุนวงล้อเพื่อเปิดคิวแรก</p>
+        </div>
+
+        <!-- Action Export Bar -->
+        <div class="flex items-center gap-2 mt-4 pt-3 border-t border-white/10">
+          <button id="copyQueueBtn" type="button" class="flex-1 py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-white/80 hover:text-white transition flex items-center justify-center gap-1.5">
+            <svg class="w-4 h-4 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+            <span>คัดลอกรายชื่อ</span>
+          </button>
+          <button id="exportCsvBtn" type="button" class="flex-1 py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-white/80 hover:text-white transition flex items-center justify-center gap-1.5">
+            <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span>ดาวน์โหลด CSV</span>
+          </button>
+          <button id="undoLastBtn" type="button" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-white/60 hover:text-white transition" title="ย้อนกลับ 1 ลำดับ">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-2xl bg-[#111a14] border border-lime-500/40 text-white text-xs shadow-2xl shadow-black/80 flex items-center gap-2 pointer-events-none transition-all duration-300 opacity-0 translate-y-4">
+  <span id="toastText">บันทึกสำเร็จ</span>
+</div>
+
+<dialog id="customConfirmModal" class="p-6 rounded-3xl bg-[#0d1610] border border-orange-500/40 text-white shadow-2xl max-w-sm w-full backdrop-blur-xl">
+  <div class="text-center">
+    <div class="w-12 h-12 rounded-full bg-orange-500/20 text-orange-400 mx-auto flex items-center justify-center mb-3">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+    </div>
+    <h4 id="confirmModalTitle" class="text-base font-bold mb-1">ยืนยันการทำรายการ</h4>
+    <p id="confirmModalMsg" class="text-xs text-white/70 mb-5 leading-relaxed">คุณต้องการดำเนินการนี้หรือไม่?</p>
+    <div class="flex gap-2">
+      <button id="confirmCancelBtn" type="button" class="flex-1 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-semibold transition">ยกเลิก</button>
+      <button id="confirmOkBtn" type="button" class="flex-1 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-black font-bold text-xs transition">ยืนยัน</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+'use strict';
+
+const STORAGE_KEY = 'SKL_SMARTX_2026_5TEAMS_V4';
+const DEFAULT_SAMPLE_TEAMS = [
+  'CAMPAIGN HUB',
+  'สินเชื่อต่อเติมในฝัน ตราช้างในเฟืองใกล้ฉัน',
+  'EAGLE EYE',
+  'POWER TRIO',
+  'ยืนยันตัวตึง!!'
+];
+
+// Cyber Metallic Palette for Wheel Slices (High-contrast, vibrant, and stage-ready)
+const SLICE_PALETTE = [
+  { bg1: '#ff7700', bg2: '#c2410c', text: '#ffffff', glow: '#ffb300' },
+  { bg1: '#16a34a', bg2: '#064e3b', text: '#ffffff', glow: '#4ade80' },
+  { bg1: '#eab308', bg2: '#854d0e', text: '#ffffff', glow: '#fef08a' },
+  { bg1: '#84cc16', bg2: '#3f6212', text: '#ffffff', glow: '#bef264' },
+  { bg1: '#ea580c', bg2: '#7c2d12', text: '#ffffff', glow: '#fdba74' },
+  { bg1: '#10b981', bg2: '#047857', text: '#ffffff', glow: '#6ee7b7' },
+  { bg1: '#f97316', bg2: '#9a3412', text: '#ffffff', glow: '#ffedd5' },
+  { bg1: '#22c55e', bg2: '#14532d', text: '#ffffff', glow: '#86efac' },
+];
+
+let teams = [];
+let drawnOrder = [];
+let currentPool = [];
+let rotationAngle = 0;
+let isSpinning = false;
+let soundEnabled = true;
+let spinDurationSec = 10;
+let audioCtx = null;
+let lastTickSector = -1;
+let lastTickTime = 0;
+let pendingConfirmAction = null;
+let winningTeamId = null;
+
+// DOM Elements
+const canvas = document.getElementById('wheelCanvas');
+const ctx = canvas.getContext('2d');
+const sparksCanvas = document.getElementById('sparksCanvas');
+const sparksCtx = sparksCanvas ? sparksCanvas.getContext('2d') : null;
+const wheelPointer = document.getElementById('wheelPointer');
+const centerSpinBtn = document.getElementById('centerSpinBtn');
+const hubPrimaryText = document.getElementById('hubPrimaryText');
+const hubSubText = document.getElementById('hubSubText');
+const hubStatusBadge = document.getElementById('hubStatusBadge');
+const remainingHint = document.getElementById('remainingHint');
+const winnerModal = document.getElementById('winnerModal');
+const winnerModalCard = document.getElementById('winnerModalCard');
+const winnerRankNum = document.getElementById('winnerRankNum');
+const winnerTeamName = document.getElementById('winnerTeamName');
+const modalDrawnCount = document.getElementById('modalDrawnCount');
+const modalRemainCount = document.getElementById('modalRemainCount');
+const modalNextBtn = document.getElementById('modalNextBtn');
+const modalBackToWheelBtn = document.getElementById('modalBackToWheelBtn');
+const modalXCloseBtn = document.getElementById('modalXCloseBtn');
+const adminDialog = document.getElementById('adminDialog');
+const adminBtn = document.getElementById('adminBtn');
+const closeAdminBtn = document.getElementById('closeAdminBtn');
+const teamTextarea = document.getElementById('teamTextarea');
+const inputCountTag = document.getElementById('inputCountTag');
+const inputErrorMsg = document.getElementById('inputErrorMsg');
+const applyTeamsBtn = document.getElementById('applyTeamsBtn');
+const loadSampleBtn = document.getElementById('loadSampleBtn');
+const clearInputBtn = document.getElementById('clearInputBtn');
+const spinDurationSelect = document.getElementById('spinDurationSelect');
+const resetOrderBtn = document.getElementById('resetOrderBtn');
+const queueListContainer = document.getElementById('queueListContainer');
+const queueCountBadge = document.getElementById('queueCountBadge');
+const emptyQueueNotice = document.getElementById('emptyQueueNotice');
+const copyQueueBtn = document.getElementById('copyQueueBtn');
+const exportCsvBtn = document.getElementById('exportCsvBtn');
+const undoLastBtn = document.getElementById('undoLastBtn');
+const soundBtn = document.getElementById('soundBtn');
+const soundLabel = document.getElementById('soundLabel');
+const soundIcon = document.getElementById('soundIcon');
+const screenBtn = document.getElementById('screenBtn');
+const toastNotification = document.getElementById('toastNotification');
+const toastText = document.getElementById('toastText');
+const customConfirmModal = document.getElementById('customConfirmModal');
+const confirmModalTitle = document.getElementById('confirmModalTitle');
+const confirmModalMsg = document.getElementById('confirmModalMsg');
+const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+const confirmOkBtn = document.getElementById('confirmOkBtn');
+
+function initAudio() {
+  if (!soundEnabled) return;
+  try {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  } catch (e) {
+    console.warn('AudioContext init failed', e);
+  }
+}
+
+function playTickSound(frequency = 750, duration = 0.035, volume = 0.05) {
+  if (!soundEnabled || !audioCtx || audioCtx.state !== 'running') return;
+  try {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const now = audioCtx.currentTime;
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(frequency, now);
+    osc.frequency.exponentialRampToValueAtTime(320, now + duration);
+
+    gain.gain.setValueAtTime(volume, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start(now);
+    osc.stop(now + duration + 0.01);
+  } catch (e) {}
+}
+
+function playFanfareSound() {
+  if (!soundEnabled || !audioCtx || audioCtx.state !== 'running') return;
+  try {
+    const notes = [440, 554.37, 659.25, 880, 1108.73];
+    const now = audioCtx.currentTime;
+    notes.forEach((freq, idx) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const noteStart = now + idx * 0.09;
+      const duration = 0.45;
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, noteStart);
+
+      gain.gain.setValueAtTime(0, noteStart);
+      gain.gain.linearRampToValueAtTime(0.08, noteStart + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, noteStart + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(noteStart);
+      osc.stop(noteStart + duration + 0.02);
+    });
+  } catch (e) {}
+}
+
+function showToast(msg) {
+  toastText.textContent = msg;
+  toastNotification.classList.remove('opacity-0', 'translate-y-4');
+  setTimeout(() => {
+    toastNotification.classList.add('opacity-0', 'translate-y-4');
+  }, 2800);
+}
+
+function promptConfirm(title, msg, onOk) {
+  confirmModalTitle.textContent = title;
+  confirmModalMsg.textContent = msg;
+  pendingConfirmAction = onOk;
+  customConfirmModal.showModal();
+}
+
+confirmCancelBtn.addEventListener('click', () => {
+  customConfirmModal.close();
+  pendingConfirmAction = null;
+});
+
+confirmOkBtn.addEventListener('click', () => {
+  customConfirmModal.close();
+  if (typeof pendingConfirmAction === 'function') {
+    pendingConfirmAction();
+  }
+  pendingConfirmAction = null;
+});
+
+function saveState() {
+  try {
+    const state = {
+      teams,
+      drawnOrder,
+      soundEnabled,
+      spinDurationSec,
+      draftText: teamTextarea.value
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    if (Array.isArray(data.teams) && data.teams.length > 0) {
+      teams = data.teams;
+      drawnOrder = Array.isArray(data.drawnOrder) ? data.drawnOrder : [];
+      soundEnabled = data.soundEnabled !== false;
+      spinDurationSec = Number(data.spinDurationSec) || 10;
+      spinDurationSelect.value = String(spinDurationSec);
+      teamTextarea.value = typeof data.draftText === 'string' ? data.draftText : teams.map(t => t.name).join('\n');
+      return true;
+    }
+  } catch (e) {}
+  return false;
+}
+
+function getRemainingTeams() {
+  const drawnSet = new Set(drawnOrder);
+  return teams.filter(t => !drawnSet.has(t.id));
+}
+
+function drawWheel() {
+  const size = canvas.width;
+  const center = size / 2;
+  const radius = center - 52;
+  const pool = currentPool.length > 0 ? currentPool : teams;
+  const sliceCount = pool.length;
+
+  ctx.clearRect(0, 0, size, size);
+
+  ctx.save();
+  ctx.translate(center, center);
+
+  // Outer Multi-layer Metallic Bevel Rim
+  const rimGrad = ctx.createRadialGradient(0, 0, radius - 18, 0, 0, radius + 42);
+  rimGrad.addColorStop(0, '#0a100c');
+  rimGrad.addColorStop(0.25, '#2f4534');
+  rimGrad.addColorStop(0.5, '#121e15');
+  rimGrad.addColorStop(0.75, '#5c7f65');
+  rimGrad.addColorStop(0.92, '#18271c');
+  rimGrad.addColorStop(1, '#050906');
+
+  ctx.fillStyle = rimGrad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius + 40, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Edge Neon Glow Ring (Lime-Gold)
+  ctx.strokeStyle = '#22c55e';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius + 39, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Mechanical Rivets / Pulsing LED Indicators around rim
+  const rivetCount = 36;
+  const now = performance.now() * 0.003;
+  for (let i = 0; i < rivetCount; i++) {
+    const angle = (i / rivetCount) * (Math.PI * 2);
+    const rx = Math.cos(angle) * (radius + 22);
+    const ry = Math.sin(angle) * (radius + 22);
+    const isOrange = i % 2 === 0;
+    const pulseFactor = 0.7 + 0.3 * Math.sin(now + i);
+
+    ctx.beginPath();
+    ctx.arc(rx, ry, (isOrange ? 5.5 : 4) * pulseFactor, 0, Math.PI * 2);
+    ctx.fillStyle = isOrange ? '#ff7700' : '#84cc16';
+    ctx.shadowColor = isOrange ? '#ff941a' : '#a3e635';
+    ctx.shadowBlur = 10;
+    ctx.fill();
+  }
+  ctx.shadowBlur = 0;
+
+  // Segments Rotation
+  ctx.save();
+  ctx.rotate(rotationAngle);
+
+  if (sliceCount > 0) {
+    const anglePerSlice = (Math.PI * 2) / sliceCount;
+
+    pool.forEach((team, i) => {
+      const startAngle = -Math.PI / 2 + i * anglePerSlice;
+      const endAngle = startAngle + anglePerSlice;
+      const palette = SLICE_PALETTE[(team.id - 1) % SLICE_PALETTE.length];
+      const isWinnerSlice = !isSpinning && winningTeamId === team.id;
+
+      // Slice sector path
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.arc(0, 0, radius, startAngle, endAngle);
+      ctx.closePath();
+
+      // Deep rich gradient
+      const grad = ctx.createRadialGradient(0, 0, radius * 0.2, 0, 0, radius);
+      grad.addColorStop(0, palette.bg2);
+      grad.addColorStop(0.85, palette.bg1);
+      grad.addColorStop(1, isWinnerSlice ? '#ffd700' : palette.bg1);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // High-contrast Slice Boundary
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#050a06';
+      ctx.stroke();
+
+      // Curved Rim Highlight Glass Arch
+      ctx.beginPath();
+      ctx.arc(0, 0, radius - 10, startAngle + 0.02, endAngle - 0.02);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.42)';
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+      // Text Drawing: Oriented radially along segment without inverting or flipping
+      ctx.save();
+      const midAngle = startAngle + anglePerSlice / 2;
+      ctx.rotate(midAngle);
+      ctx.translate(radius * 0.60, 0);
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      const title = team.name;
+      const maxRadialLength = radius * 0.52; // Available span along the sector radius
+
+      // Smart Multi-line for Long Team Names (e.g. สินเชื่อต่อเติมในฝัน ตราช้างในเฟืองใกล้ฉัน)
+      if (title.length > 20) {
+        const mid = Math.floor(title.length / 2);
+        let splitPos = title.lastIndexOf(' ', mid + 4);
+        if (splitPos === -1 || splitPos < mid - 6) {
+          splitPos = title.indexOf(' ', mid - 4);
+        }
+        if (splitPos === -1) splitPos = mid;
+
+        const line1 = title.substring(0, splitPos).trim();
+        const line2 = title.substring(splitPos).trim();
+
+        // Extra large font sizing for two lines (36px - 40px)
+        let sz = 38;
+        ctx.font = `800 ${sz}px "Kanit", sans-serif`;
+        while (sz > 26 && (ctx.measureText(line1).width > maxRadialLength || ctx.measureText(line2).width > maxRadialLength)) {
+          sz -= 1.5;
+          ctx.font = `800 ${sz}px "Kanit", sans-serif`;
+        }
+        const lineSpacing = sz * 1.28;
+
+        // Pass 1: Heavy dark outline for absolute clarity against bright colors
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = 'rgba(4, 9, 6, 0.95)';
+        ctx.strokeText(line1, 0, -lineSpacing / 2);
+        ctx.strokeText(line2, 0, lineSpacing / 2);
+
+        // Pass 2: Bright luminous text with soft glow
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+        ctx.shadowBlur = 12;
+        ctx.fillText(line1, 0, -lineSpacing / 2);
+        ctx.fillText(line2, 0, lineSpacing / 2);
+      } else {
+        // Dramatic single-line text sizing (48px - 54px)
+        let sz = 50;
+        ctx.font = `900 ${sz}px "Kanit", sans-serif`;
+        while (sz > 30 && ctx.measureText(title).width > maxRadialLength) {
+          sz -= 2;
+          ctx.font = `900 ${sz}px "Kanit", sans-serif`;
+        }
+
+        // Pass 1: Bold dark outline
+        ctx.lineWidth = 9;
+        ctx.strokeStyle = 'rgba(4, 9, 6, 0.95)';
+        ctx.strokeText(title, 0, 0);
+
+        // Pass 2: Crisp white fill with drop shadow
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+        ctx.shadowBlur = 14;
+        ctx.fillText(title, 0, 0);
+      }
+
+      ctx.restore();
+    });
+  }
+
+  ctx.restore(); // end slice rotation
+  ctx.restore(); // end center translation
+}
+
+function spinWheel() {
+  if (isSpinning) return;
+  const remaining = getRemainingTeams();
+  if (remaining.length === 0) {
+    showToast('ครบทุกทีมแล้ว! กด "จัดการรายชื่อ" เพื่อเริ่มใหม่');
+    updateControls();
+    return;
+  }
+
+  initAudio();
+  isSpinning = true;
+  winningTeamId = null;
+  currentPool = [...remaining];
+  document.body.classList.add('spin-active');
+  hubPrimaryText.textContent = 'SPIN';
+  hubSubText.textContent = 'กำลังหมุน...';
+  updateControls();
+
+  const poolLen = currentPool.length;
+  let winnerIndex = 0;
+  if (window.crypto && window.crypto.getRandomValues) {
+    const randArr = new Uint32Array(1);
+    window.crypto.getRandomValues(randArr);
+    winnerIndex = randArr[0] % poolLen;
+  } else {
+    winnerIndex = Math.floor(Math.random() * poolLen);
+  }
+  const winningTeam = currentPool[winnerIndex];
+
+  // Target alignment under 12 o'clock pointer
+  const anglePerSlice = (Math.PI * 2) / poolLen;
+  const sliceTargetAngle = -(winnerIndex + 0.5) * anglePerSlice;
+  
+  const jitter = (Math.random() - 0.5) * anglePerSlice * 0.45;
+  const currentAngle = rotationAngle % (Math.PI * 2);
+  const targetEndBase = sliceTargetAngle + jitter;
+  const deltaNeeded = ((targetEndBase - currentAngle) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+
+  const extraRotations = Math.max(6, Math.floor(spinDurationSec * 0.9));
+  const finalTargetAngle = rotationAngle + extraRotations * (Math.PI * 2) + deltaNeeded;
+
+  const startTime = performance.now();
+  const durationMs = spinDurationSec * 1000;
+  const startAngle = rotationAngle;
+
+  function cubicEaseOut(t) {
+    return 1 - Math.pow(1 - t, 3.4);
+  }
+
+  function frame(currentTime) {
+    const elapsed = Math.max(0, currentTime - startTime);
+    const progress = Math.min(1, elapsed / durationMs);
+    const ease = cubicEaseOut(progress);
+
+    rotationAngle = startAngle + (finalTargetAngle - startAngle) * ease;
+    drawWheel();
+
+    // Sector ticking sound & indicator recoil
+    const currentNorm = (rotationAngle + Math.PI / 2) % (Math.PI * 2);
+    const currentSector = Math.floor(((currentNorm + Math.PI * 2) % (Math.PI * 2)) / anglePerSlice);
+
+    if (currentSector !== lastTickSector && currentTime - lastTickTime > 45) {
+      lastTickSector = currentSector;
+      lastTickTime = currentTime;
+      const freq = 700 + (1 - progress) * 220;
+      playTickSound(freq, 0.035, 0.045);
+
+      wheelPointer.style.transform = 'translateX(-50%) rotate(-16deg)';
+      setTimeout(() => {
+        wheelPointer.style.transform = 'translateX(-50%) rotate(0deg)';
+      }, 70);
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      finishSpin(winningTeam);
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+function finishSpin(winner) {
+  isSpinning = false;
+  winningTeamId = winner.id;
+  document.body.classList.remove('spin-active');
+  hubPrimaryText.textContent = 'READY';
+  hubSubText.textContent = 'กดเพื่อหมุน';
+
+  drawnOrder.push(winner.id);
+  saveState();
+  updateQueueUI();
+  updateControls();
+  drawWheel();
+
+  playFanfareSound();
+  launchSparks();
+
+  const rank = drawnOrder.length;
+  winnerRankNum.textContent = '#' + String(rank).padStart(2, '0');
+  winnerTeamName.textContent = winner.name;
+  modalDrawnCount.textContent = rank;
+  modalRemainCount.textContent = teams.length - rank;
+
+  winnerModal.classList.remove('opacity-0', 'pointer-events-none');
+  winnerModalCard.classList.remove('scale-90');
+  winnerModalCard.classList.add('scale-100');
+}
+
+function closeWinnerModal() {
+  winnerModal.classList.add('opacity-0', 'pointer-events-none');
+  winnerModalCard.classList.remove('scale-100');
+  winnerModalCard.classList.add('scale-90');
+}
+
+modalBackToWheelBtn.addEventListener('click', closeWinnerModal);
+modalXCloseBtn.addEventListener('click', closeWinnerModal);
+
+winnerModal.addEventListener('click', (e) => {
+  if (e.target === winnerModal) {
+    closeWinnerModal();
+  }
+});
+
+modalNextBtn.addEventListener('click', () => {
+  closeWinnerModal();
+  if (drawnOrder.length < teams.length) {
+    setTimeout(spinWheel, 300);
+  }
+});
+
+function launchSparks() {
+  if (!sparksCanvas || !sparksCtx) return;
+  sparksCanvas.classList.remove('hidden');
+  const dpr = window.devicePixelRatio || 1;
+  sparksCanvas.width = window.innerWidth * dpr;
+  sparksCanvas.height = window.innerHeight * dpr;
+  sparksCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const colors = ['#ff7700', '#ffd047', '#a3e635', '#22c55e', '#ffffff', '#38bdf8'];
+  const particleCount = 110;
+  const particles = [];
+  const startX = window.innerWidth / 2;
+  const startY = window.innerHeight / 2;
+
+  for (let i = 0; i < particleCount; i++) {
+    const angle = Math.random() * (Math.PI * 2);
+    const speed = 4 + Math.random() * 16;
+    particles.push({
+      x: startX,
+      y: startY,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 3,
+      size: 4 + Math.random() * 7,
+      isRibbon: Math.random() > 0.45,
+      color: colors[i % colors.length],
+      alpha: 1,
+      rotation: Math.random() * (Math.PI * 2),
+      vRot: (Math.random() - 0.5) * 0.25
+    });
+  }
+
+  let startTime = performance.now();
+  function sparkFrame(now) {
+    const elapsed = now - startTime;
+    sparksCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.28; // gravity
+      p.vx *= 0.985;
+      p.rotation += p.vRot;
+      p.alpha = Math.max(0, 1 - elapsed / 2400);
+
+      sparksCtx.save();
+      sparksCtx.globalAlpha = p.alpha;
+      sparksCtx.translate(p.x, p.y);
+      sparksCtx.rotate(p.rotation);
+      sparksCtx.fillStyle = p.color;
+
+      if (p.isRibbon) {
+        sparksCtx.fillRect(-p.size / 2, -p.size / 2, p.size * 2, p.size);
+      } else {
+        sparksCtx.beginPath();
+        sparksCtx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+        sparksCtx.fill();
+      }
+      sparksCtx.restore();
+    });
+
+    if (elapsed < 2400) {
+      requestAnimationFrame(sparkFrame);
+    } else {
+      sparksCanvas.classList.add('hidden');
+    }
+  }
+
+  requestAnimationFrame(sparkFrame);
+}
+
+function updateQueueUI() {
+  queueListContainer.innerHTML = '';
+  const total = teams.length;
+  const drawn = drawnOrder.length;
+
+  queueCountBadge.textContent = `${drawn} / ${total}`;
+  emptyQueueNotice.classList.toggle('hidden', drawn > 0);
+
+  drawnOrder.forEach((id, index) => {
+    const team = teams.find(t => t.id === id);
+    if (!team) return;
+    const item = document.createElement('div');
+    const isLatest = index === drawn - 1;
+
+    item.className = `p-2.5 rounded-xl border flex items-center justify-between transition-all ${
+      isLatest
+        ? 'bg-lime-500/15 border-lime-500/50 shadow-md shadow-lime-500/10'
+        : 'bg-[#080d0a] border-white/10'
+    }`;
+
+    item.innerHTML = `
+      <div class="flex items-center gap-3">
+        <span class="w-7 h-7 rounded-lg ${isLatest ? 'bg-lime-500 text-black' : 'bg-white/10 text-white/70'} flex items-center justify-center text-xs font-mono font-bold">
+          ${String(index + 1).padStart(2, '0')}
+        </span>
+        <span class="text-sm font-semibold text-white/95">${team.name}</span>
+      </div>
+      ${isLatest ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-lime-400 text-black font-bold uppercase">ล่าสุด</span>' : ''}
+    `;
+    queueListContainer.appendChild(item);
+  });
+
+  queueListContainer.scrollTop = queueListContainer.scrollHeight;
+}
+
+function updateControls() {
+  const remaining = getRemainingTeams().length;
+  const total = teams.length;
+  const nextRank = drawnOrder.length + 1;
+
+  if (remaining === 0) {
+    hubPrimaryText.textContent = 'DONE';
+    hubSubText.textContent = 'ครบทุกทีมแล้ว';
+    hubStatusBadge.textContent = 'จบการสุ่ม';
+    remainingHint.textContent = `สุ่มครบแล้ว ${total} ทีม`;
+  } else {
+    hubStatusBadge.textContent = `คิวที่ ${nextRank}`;
+    remainingHint.textContent = `เหลือ ${remaining} จาก ${total} ทีม`;
+  }
+
+  centerSpinBtn.disabled = isSpinning || remaining === 0;
+  inputCountTag.textContent = `${teams.length} ทีม`;
+}
+
+function parseAndApplyTeams(rawText) {
+  const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  if (lines.length === 0) {
+    inputErrorMsg.textContent = 'กรุณาใส่ชื่อทีมอย่างน้อย 1 ทีม';
+    inputErrorMsg.classList.remove('hidden');
+    return false;
+  }
+  if (lines.length > 60) {
+    inputErrorMsg.textContent = 'รองรับสูงสุด 60 ทีมใน 1 รอบ';
+    inputErrorMsg.classList.remove('hidden');
+    return false;
+  }
+  inputErrorMsg.classList.add('hidden');
+
+  teams = lines.map((name, i) => ({ id: i + 1, name }));
+  drawnOrder = [];
+  currentPool = [...teams];
+  rotationAngle = 0;
+  saveState();
+  updateQueueUI();
+  updateControls();
+  drawWheel();
+  showToast(`อัปเดตเรียบร้อย ${teams.length} ทีม`);
+  return true;
+}
+
+applyTeamsBtn.addEventListener('click', () => {
+  if (drawnOrder.length > 0) {
+    promptConfirm(
+      'เปลี่ยนรายชื่อทีม?',
+      `การอัปเดตรายชื่อใหม่จะล้างผลการสุ่มเดิม (${drawnOrder.length} ทีม) และเริ่มใหม่ ยืนยันหรือไม่?`,
+      () => {
+        if (parseAndApplyTeams(teamTextarea.value)) {
+          adminDialog.close();
+        }
+      }
+    );
+  } else {
+    if (parseAndApplyTeams(teamTextarea.value)) {
+      adminDialog.close();
+    }
+  }
+});
+
+loadSampleBtn.addEventListener('click', () => {
+  teamTextarea.value = DEFAULT_SAMPLE_TEAMS.join('\n');
+  inputErrorMsg.classList.add('hidden');
+});
+
+clearInputBtn.addEventListener('click', () => {
+  teamTextarea.value = '';
+  teamTextarea.focus();
+});
+
+resetOrderBtn.addEventListener('click', () => {
+  if (drawnOrder.length === 0) {
+    showToast('ยังไม่มีผลการสุ่มที่ต้องล้าง');
+    return;
+  }
+  promptConfirm(
+    'เริ่มการสุ่มใหม่?',
+    `ล้างลำดับที่สุ่มไปแล้วทั้งหมด ${drawnOrder.length} ทีม และนำทุกทีมกลับมาในวงล้อ?`,
+    () => {
+      drawnOrder = [];
+      currentPool = [...teams];
+      rotationAngle = 0;
+      saveState();
+      updateQueueUI();
+      updateControls();
+      drawWheel();
+      showToast('รีเซ็ตลำดับเรียบร้อยแล้ว');
+    }
+  );
+});
+
+undoLastBtn.addEventListener('click', () => {
+  if (drawnOrder.length === 0 || isSpinning) return;
+  const removedId = drawnOrder.pop();
+  const removedTeam = teams.find(t => t.id === removedId);
+  currentPool = getRemainingTeams();
+  saveState();
+  updateQueueUI();
+  updateControls();
+  drawWheel();
+  showToast(`นำ "${removedTeam ? removedTeam.name : 'ทีม'}" กลับเข้าสู่วงล้อแล้ว`);
+});
+
+copyQueueBtn.addEventListener('click', () => {
+  if (drawnOrder.length === 0) {
+    showToast('ยังไม่มีรายชื่อที่สุ่มได้');
+    return;
+  }
+  const rows = drawnOrder.map((id, idx) => {
+    const team = teams.find(t => t.id === id);
+    return `${idx + 1}. ${team ? team.name : ''}`;
+  });
+  const text = `ลำดับการนำเสนอ: BEYOND 20 SMARTX 2026\n(สยามคูโบต้า ลีสซิ่ง 20th Anniversary)\n\n` + rows.join('\n');
+
+  try {
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = text;
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextarea);
+    showToast('คัดลอกลำดับนำเสนอลงคลิปบอร์ดแล้ว');
+  } catch (e) {
+    showToast('ไม่สามารถคัดลอกได้');
+  }
+});
+
+exportCsvBtn.addEventListener('click', () => {
+  if (drawnOrder.length === 0) {
+    showToast('ยังไม่มีรายชื่อที่สุ่มได้');
+    return;
+  }
+  const lines = ['ลำดับที่,ชื่อทีม'];
+  drawnOrder.forEach((id, idx) => {
+    const team = teams.find(t => t.id === id);
+    lines.push(`"${idx + 1}","${(team ? team.name : '').replace(/"/g, '""')}"`);
+  });
+  const csvContent = '\uFEFF' + lines.join('\r\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `SKL_SMARTX_2026_Presentation_Order.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('ดาวน์โหลดไฟล์ CSV เรียบร้อยแล้ว');
+});
+
+spinDurationSelect.addEventListener('change', (e) => {
+  spinDurationSec = Number(e.target.value) || 10;
+  saveState();
+});
+
+soundBtn.addEventListener('click', () => {
+  soundEnabled = !soundEnabled;
+  soundLabel.textContent = soundEnabled ? 'เปิดเสียง' : 'ปิดเสียง';
+  soundIcon.innerHTML = soundEnabled
+    ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>`
+    : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>`;
+  initAudio();
+  saveState();
+  showToast(soundEnabled ? 'เปิดเสียงเอฟเฟกต์แล้ว' : 'ปิดเสียงแล้ว');
+});
+
+screenBtn.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen().catch(() => {});
+  }
+});
+
+adminBtn.addEventListener('click', () => adminDialog.showModal());
+closeAdminBtn.addEventListener('click', () => adminDialog.close());
+
+centerSpinBtn.addEventListener('click', () => {
+  if (!isSpinning) spinWheel();
+});
+
+canvas.addEventListener('click', () => {
+  if (!isSpinning) spinWheel();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (!winnerModal.classList.contains('pointer-events-none')) {
+      closeWinnerModal();
+      return;
+    }
+  }
+  if (e.code === 'Space' && !e.repeat) {
+    const activeTag = document.activeElement ? document.activeElement.tagName : '';
+    if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(activeTag)) return;
+    if (adminDialog.open || customConfirmModal.open || !winnerModal.classList.contains('pointer-events-none')) return;
+    e.preventDefault();
+    if (!isSpinning && getRemainingTeams().length > 0) {
+      spinWheel();
+    }
+  }
+});
+
+window.addEventListener('load', () => {
+  const hasLoaded = loadState();
+  if (!hasLoaded) {
+    teamTextarea.value = DEFAULT_SAMPLE_TEAMS.join('\n');
+    parseAndApplyTeams(teamTextarea.value);
+  } else {
+    currentPool = getRemainingTeams();
+    updateQueueUI();
+    updateControls();
+    drawWheel();
+  }
+});
+
+})();
+</script>
+</body>
+</html>
